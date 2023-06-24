@@ -26,4 +26,6 @@ function createBoard() {
     gamesBoardContainer.append(gamesBoardContainer)
 }
 
+createBoard()
+
 flipButton.addEventListener('click', flip)
