@@ -1,16 +1,15 @@
 const gamesBoardContainer = document.querySelector('#gamesboard-container')
 const optionContainer = document.querySelector('.option-container')
 const flipButton = document.querySelector('#flip-button')
+const startButton = document.querySelector('#start-button')
+const infoDisplay = document.querySelector('#info')
+const turnDisplay = document.querySelector('#turn-display')
 
 // Option choosing
 let angle = 0
 function flip() {
     const optionShips = Array.from(optionContainer.children)
-    if (angle === 0) {
-        angle = 90
-    } else {
-        angle = 0
-    }
+    angle = angle === 0 ? 90 : 0
     optionShips.forEach(optionShip => optionShip.style.transform = `rotate(${angle}deg)`)
 }
 flipButton.addEventListener('click', flip)
@@ -154,3 +153,27 @@ function hightlightArea(startIndex, ship) {
         })
     }
 }
+
+let gameOver = false
+let playerTurn
+
+// Start Game
+function startGame() {
+    if (optionContainer.children.length != 0) {
+        infoDisplay.textContent = 'Please place all your pieces first!'
+    } else {
+        const allBoardBlocks = document.querySelectorAll('#computer,div')
+        allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    }
+}
+
+function handleClick(e) {
+    if (!gameOver) {
+        if (e.target.classList.contains('taken')) {
+            e.target.classList.add('boom')
+            infoDisplay.textContent = 'You hit the computers ship!'
+        }
+    }
+}
+
+startButton.addEventListener('click', startGame)
