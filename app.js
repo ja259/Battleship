@@ -251,11 +251,12 @@ function checkScore(user, userHits, userSunkShips) {
         if (
             userHits.filter(storedShipName => storedShipName === shipName).length === shipLength
         ) {
-            infoDisplay.textContent = `You sunk the ${user}'s ${shipName}`
             if (user === 'player') {
+                infoDisplay.textContent = `You sunk the computer's ${shipName}`
                 playerHits = userHits.filter(storedShipName => storedShipName !== shipName)
             }
             if (user === 'computer') {
+                infoDisplay.textContent = `The computer sunk your ${shipName}`
                 computerHits = userHits.filter(storedShipName => storedShipName !== shipName)
             }
             userSunkShips.push(shipName)
